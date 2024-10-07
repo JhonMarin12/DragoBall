@@ -1,6 +1,5 @@
 import sys
 from io import BytesIO
-
 import requests
 from PIL import Image
 from PyQt6.QtCore import Qt
@@ -9,7 +8,9 @@ from PyQt6.QtWidgets import QWidget, QVBoxLayout, QLabel, QLineEdit, QApplicatio
 
 
 def get_data(url):
+    """Función que retorna los datos la url dada"""
     response = requests.get(url)
+    # Se usa el status code 200 ya que este signfica que la respuesta es exitosa
     if response.status_code == 200:
         return response.json()
     else:
@@ -18,10 +19,10 @@ def get_data(url):
 
 
 def get_character(character_name):
+    """Trae los datos de un personaje especifico dado por el usuario"""
     url = f'https://dragonball-api.com/api/characters?name={character_name}'
     response = get_data(url)
     return response
-
 
 vegeta = get_character('Goku')
 print(vegeta)
